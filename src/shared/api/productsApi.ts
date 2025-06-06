@@ -21,7 +21,7 @@ export const productsApi = createApi({
     baseUrl: process.env.NEXT_PUBLIC_API_URL,
   }),
   endpoints: (builder) => ({
-    getProducts: builder.query<{ items: IGetProductsResponse }, { page: number; page_size?: number }>({
+    getProducts: builder.query<IGetProductsResponse, { page: number; page_size?: number }>({
       query: ({ page, page_size = 20 }) => ({
         url: `products?page=${page}&page_size=${page_size}`,
         method: "GET",
