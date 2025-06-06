@@ -1,16 +1,20 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/shared/store";
 import { productsSlice } from "@/shared/slices/productsSlice";
 import { IGetProductsResponse, productsApi } from "@/shared/api/productsApi";
 import { ProductList } from "@/entities/product/ProductList";
+import { IntersectionCheck } from "@/shared/IntersectionCheck";
 
 export const ProductsPage = ({ initial }: { initial: IGetProductsResponse }) => {
+  const [page, setPage] = useState(initial.page);
+
   const dispatch = useDispatch();
   const products = useSelector((state: RootState) => state.products.items);
   const basketItems = useSelector((state: RootState) => state.basket.items);
+  const [isEndOfList, setIsEndOfList] = useState(false);
 
   useEffect(() => {
     if (initial?.items) {
@@ -18,13 +22,14 @@ export const ProductsPage = ({ initial }: { initial: IGetProductsResponse }) => 
     }
   }, [initial, dispatch]);
 
-  const { data: nextPageData } = productsApi.useGetProductsQuery({ page: 2 });
+  const { data: productsData } = productsApi.useGetProductsQuery({ page: page + 1 }, { skip: !isEndOfList });
 
   useEffect(() => {
-    if (nextPageData?.items) {
-      dispatch(productsSlice.actions.appendProducts(nextPageData.items));
+    if (productsData) {
+      dispatch(productsSlice.actions.appendProducts(productsData.items));
+      setPage(productsData.page);
     }
-  }, [nextPageData, dispatch]);
+  }, [productsData]);
 
   const allProducts = products.length ? products : initial.items;
 
@@ -36,5 +41,10 @@ export const ProductsPage = ({ initial }: { initial: IGetProductsResponse }) => 
     };
   });
 
-  return <ProductList products={productsWithCount} />;
+  return (
+    <>
+      <ProductList products={productsWithCount} />
+      <IntersectionCheck key={page} onEnter={() => setIsEndOfList(true)} onLeave={() => setIsEndOfList(false)} />
+    </>
+  );
 };
