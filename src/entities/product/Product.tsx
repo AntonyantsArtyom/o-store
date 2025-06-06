@@ -3,6 +3,7 @@ import { Button, Card, InputNumber } from "antd";
 import styles from "./styles.module.scss";
 import { basketSlice } from "@/shared/slices/basketSlice";
 import { useDispatch } from "react-redux";
+import { Image } from "antd";
 
 enum CardType {
   default = "default",
@@ -48,7 +49,7 @@ export const ProductCard = ({ image_url, title, description, price, count, id }:
   return (
     <Card hoverable className={styles.card}>
       <h1>{id}</h1>
-      <img className="image" src={image_url} />
+      <Image className="image" src={image_url} />
       <h2 className="title">{title}</h2>
       <p className="description">{description}</p>
       <p className="price">{price}</p>
