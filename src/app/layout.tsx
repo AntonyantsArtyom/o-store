@@ -1,3 +1,4 @@
+import { StateProvider } from "@/shared/StateProvider";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -8,14 +9,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ru">
-      <body>{children}</body>
+      <body>
+        <StateProvider>{children}</StateProvider>
+      </body>
     </html>
   );
 }
