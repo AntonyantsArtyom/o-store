@@ -10,6 +10,7 @@ import { ProductList } from "@/entities/product/ProductList";
 export const ProductsPage = ({ initial }: { initial: IGetProductsResponse }) => {
   const dispatch = useDispatch();
   const products = useSelector((state: RootState) => state.products.items);
+  const basketItems = useSelector((state: RootState) => state.basket.items);
 
   useEffect(() => {
     if (initial?.items) {
@@ -25,5 +26,15 @@ export const ProductsPage = ({ initial }: { initial: IGetProductsResponse }) => 
     }
   }, [nextPageData, dispatch]);
 
-  return <ProductList products={products.length ? products : initial.items} />;
+  const allProducts = products.length ? products : initial.items;
+
+  const productsWithCount = allProducts.map((product) => {
+    const basketItem = basketItems.find((item) => item.id === product.id);
+    return {
+      ...product,
+      count: basketItem?.count,
+    };
+  });
+
+  return <ProductList products={productsWithCount} />;
 };
