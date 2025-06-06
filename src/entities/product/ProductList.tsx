@@ -6,7 +6,7 @@ export const ProductList = ({ products }: { products: IProduct[] }) => {
   return (
     <div className={styles.container}>
       {products.map((product) => (
-        <ProductCard {...product} />
+        <ProductCard key={product.id} {...product} />
       ))}
     </div>
   );
