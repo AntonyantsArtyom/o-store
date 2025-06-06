@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/shared/store";
 import { productsSlice } from "@/shared/slices/productsSlice";
 import { IGetProductsResponse, productsApi } from "@/shared/api/productsApi";
+import { ProductList } from "@/entities/product/ProductList";
 
 export const ProductsPage = ({ initial }: { initial: IGetProductsResponse }) => {
   const dispatch = useDispatch();
@@ -24,5 +25,5 @@ export const ProductsPage = ({ initial }: { initial: IGetProductsResponse }) => 
     }
   }, [nextPageData, dispatch]);
 
-  return <pre>{JSON.stringify(products.length ? products : initial.items, null, 2)}</pre>;
+  return <ProductList products={products.length ? products : initial.items} />;
 };
