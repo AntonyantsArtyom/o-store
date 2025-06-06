@@ -22,7 +22,7 @@ export const productsApi = createApi({
   }),
   endpoints: (builder) => ({
     getProducts: builder.query<IGetProductsResponse, { page: number; page_size?: number }>({
-      query: ({ page, page_size = 20 }) => ({
+      query: ({ page, page_size = 18 }) => ({
         url: `products?page=${page}&page_size=${page_size}`,
         method: "GET",
       }),
