@@ -1,8 +1,7 @@
 import { IProduct } from "@/shared/api/productsApi";
 import { Button, Card, InputNumber } from "antd";
 import styles from "./styles.module.scss";
-import { useState } from "react";
-import { basketSlice, IBasketItem } from "@/shared/slices/basketSlice";
+import { basketSlice } from "@/shared/slices/basketSlice";
 import { useDispatch } from "react-redux";
 
 enum CardType {
@@ -22,6 +21,15 @@ export const ProductCard = ({ image_url, title, description, price, count, id }:
     dispatch(basketSlice.actions.addToBasket(id));
   };
 
+  const handleCountChange = (value: number | null) => {
+    if (value !== null) {
+      if (value === 0) {
+        return dispatch(basketSlice.actions.removeFromBasket(id));
+      }
+      dispatch(basketSlice.actions.updateCount({ id, count: value }));
+    }
+  };
+
   const renderFootContent = () => {
     switch (type) {
       case CardType.default:
@@ -31,7 +39,7 @@ export const ProductCard = ({ image_url, title, description, price, count, id }:
           </Button>
         );
       case CardType.withCount:
-        return <InputNumber min={1} max={10} value={count} changeOnWheel />;
+        return <InputNumber min={0} max={10} value={count} onChange={handleCountChange} changeOnWheel />;
       default:
         return null;
     }
