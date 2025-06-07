@@ -4,6 +4,7 @@ import styles from "./styles.module.scss";
 import { basketSlice } from "@/shared/slices/basketSlice";
 import { useDispatch } from "react-redux";
 import { Image } from "antd";
+import { EyeOutlined } from "@ant-design/icons";
 
 enum CardType {
   default = "default",
@@ -49,7 +50,12 @@ export const ProductCard = ({ image_url, title, description, price, count, id }:
   return (
     <Card hoverable className={styles.card}>
       <h1>{id}</h1>
-      <Image src={image_url} />
+      <Image
+        preview={{
+          mask: <EyeOutlined />,
+        }}
+        src={image_url}
+      />
       <h2>{title}</h2>
       <p>{description}</p>
       <p>{price}</p>
