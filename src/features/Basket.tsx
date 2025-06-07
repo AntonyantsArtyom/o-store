@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, Button, Table, notification } from "antd";
 import { useSelector } from "react-redux";
 import { RootState } from "@/shared/store";
@@ -25,7 +25,7 @@ interface INotificationContent {
 
 export const Basket = ({ open, onCancel }: IBasketProps) => {
   const basketItems = useSelector((state: RootState) => state.basket.items);
-  const [phone, setPhone] = useState("");
+  const [phone, setPhone] = useState(localStorage.getItem("phone") || "");
 
   const [api, contextHolder] = notification.useNotification();
 
@@ -36,6 +36,14 @@ export const Basket = ({ open, onCancel }: IBasketProps) => {
     };
     api[type](content[type]);
   };
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      localStorage.setItem("phone", phone);
+    }, 500);
+
+    return () => clearTimeout(timeout);
+  }, [phone]);
 
   const TableBasketItem = basketItems.map((basketItem) => {
     return {
