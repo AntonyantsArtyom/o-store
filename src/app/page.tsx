@@ -1,4 +1,4 @@
-import { ProductsPage } from "@/pages/ProductsPage";
+import { ProductsPage } from "@/sitepages/ProductsPage";
 import { IGetProductsResponse } from "@/shared/api/productsApi";
 
 export default async function Home() {

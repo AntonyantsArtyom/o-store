@@ -1,4 +1,4 @@
-import { BasketPage } from "@/pages/BasketPage";
+import { BasketPage } from "@/sitepages/BasketPage";
 
 export default async function Basket() {
   return <BasketPage />;
