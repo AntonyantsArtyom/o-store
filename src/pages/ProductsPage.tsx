@@ -7,6 +7,7 @@ import { productsSlice } from "@/shared/slices/productsSlice";
 import { IGetProductsResponse, productsApi } from "@/shared/api/productsApi";
 import { ProductList } from "@/entities/product/ProductList";
 import { IntersectionCheck } from "@/shared/IntersectionCheck";
+import { SiteMenuWrapper } from "@/widgets/SiteMenuWrapper";
 
 export const ProductsPage = ({ initial }: { initial: IGetProductsResponse }) => {
   const [page, setPage] = useState(initial.page);
@@ -43,8 +44,10 @@ export const ProductsPage = ({ initial }: { initial: IGetProductsResponse }) => 
 
   return (
     <>
-      <ProductList products={productsWithCount} />
-      <IntersectionCheck key={page} onEnter={() => setIsEndOfList(true)} onLeave={() => setIsEndOfList(false)} />
+      <SiteMenuWrapper>
+        <ProductList products={productsWithCount} />
+        <IntersectionCheck key={page} onEnter={() => setIsEndOfList(true)} onLeave={() => setIsEndOfList(false)} />
+      </SiteMenuWrapper>
     </>
   );
 };

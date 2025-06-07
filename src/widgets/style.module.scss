@@ -1,0 +1,12 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 200px;
+}
+
+.menu.menu.menu {
+  border-inline-end: unset;
+  :global(.ant-menu-item) {
+    margin-block: 0px;
+    margin-bottom: 2px;
+  }
+}
