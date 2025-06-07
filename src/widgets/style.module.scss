@@ -8,6 +8,20 @@
   }
 }
 
+.basketButton {
+  p {
+    display: none;
+  }
+  @media (min-width: 600px) {
+    :global(.anticon) {
+      display: none;
+    }
+    p {
+      display: inline;
+    }
+  }
+}
+
 .menu.menu.menu::before,
 .menu.menu.menu::after {
   display: none;
@@ -35,11 +49,14 @@
   position: fixed;
   top: 15px;
   right: 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 
   @media (max-width: 600px) {
     width: 100%;
     position: unset;
-    display: flex;
+    flex-direction: row;
     justify-content: space-between;
     margin-bottom: 5px;
     padding-right: 15px;

@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { Basket } from "@/features/Basket";
 import { RootState } from "@/shared/store";
 import { useSelector } from "react-redux";
+import { ShoppingCartOutlined } from "@ant-design/icons";
 
 enum Routes {
   products = "/",
@@ -57,8 +58,9 @@ export const SiteMenuWrapper = ({ children }: { children: React.ReactNode }) => 
         <Menu className={styles.menu} items={items} onClick={handleClick} selectedKeys={[selectedKey]} />
         <Badge count={totalCount}>
           <Popover content={totalCount ? null : "корзина пуста"}>
-            <Button disabled={totalCount === 0} onClick={handleButtonClick}>
-              корзина
+            <Button className={styles.basketButton} disabled={totalCount === 0} onClick={handleButtonClick}>
+              <ShoppingCartOutlined />
+              <p>корзина</p>
             </Button>
           </Popover>
         </Badge>

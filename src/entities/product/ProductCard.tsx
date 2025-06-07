@@ -49,7 +49,6 @@ export const ProductCard = ({ image_url, title, description, price, count, id }:
 
   return (
     <Card hoverable className={styles.card}>
-      <h1>{id}</h1>
       <Image
         preview={{
           mask: <EyeOutlined />,
