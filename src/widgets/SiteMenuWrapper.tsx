@@ -53,10 +53,6 @@ export const SiteMenuWrapper = ({ children }: { children: React.ReactNode }) => 
   return (
     <>
       <Basket open={isBasketOpen} onCancel={handleBasketCancelClick} />
-
-      <div className={styles.container}>
-        <div>{children}</div>
-      </div>
       <div className={styles.menuContainer}>
         <Menu className={styles.menu} items={items} onClick={handleClick} selectedKeys={[selectedKey]} />
         <Badge count={totalCount}>
@@ -66,6 +62,9 @@ export const SiteMenuWrapper = ({ children }: { children: React.ReactNode }) => 
             </Button>
           </Popover>
         </Badge>
+      </div>
+      <div className={styles.container}>
+        <div>{children}</div>
       </div>
     </>
   );
