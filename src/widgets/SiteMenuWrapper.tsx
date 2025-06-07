@@ -49,10 +49,10 @@ export const SiteMenuWrapper = ({ children }: { children: React.ReactNode }) => 
       <Basket open={isBasketOpen} onCancel={handleBasketCancelClick} />
       <div className={styles.container}>
         <div>{children}</div>
-        <div>
-          <Menu className={styles.menu} items={items} onClick={handleClick} selectedKeys={[selectedKey]} />
-          <Button onClick={handleButtonClick}>корзина</Button>
-        </div>
+      </div>
+      <div className={styles.menuContainer}>
+        <Menu className={styles.menu} items={items} onClick={handleClick} selectedKeys={[selectedKey]} />
+        <Button onClick={handleButtonClick}>корзина</Button>
       </div>
     </>
   );
