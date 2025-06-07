@@ -1,5 +1,5 @@
 import { IProduct } from "@/shared/api/productsApi";
-import { ProductCard } from "./Product";
+import { ProductCard } from "./ProductCard";
 import styles from "./styles.module.scss";
 
 export const ProductList = ({ products }: { products: IProduct[] }) => {
