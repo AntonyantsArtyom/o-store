@@ -1,9 +1,11 @@
 .container {
   display: grid;
   grid-template-columns: 1fr 200px;
+  max-width: 100vw;
 }
 
 .menu.menu.menu {
+  overflow-x: hidden;
   border-inline-end: unset;
   :global(.ant-menu-item) {
     margin-block: 0px;
