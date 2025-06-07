@@ -1,26 +1,35 @@
-import { Menu, type GetProp, type MenuProps } from "antd";
+"use client";
+
+import { useRouter } from "next/navigation";
+import { Menu, MenuProps } from "antd";
 import styles from "./style.module.scss";
-type MenuItem = GetProp<MenuProps, "items">[number];
 
 export const SiteMenuWrapper = ({ children }: { children: React.ReactNode }) => {
-  const items: MenuItem[] = [
+  const router = useRouter();
+
+  const items: MenuProps["items"] = [
     {
-      key: "1",
+      key: "/",
       label: "продукты",
     },
     {
-      key: "2",
+      key: "/basket",
       label: "корзина",
     },
     {
-      key: "3",
+      key: "/reviews",
       label: "отзывы",
     },
   ];
+
+  const handleClick: MenuProps["onClick"] = (e) => {
+    router.push(e.key);
+  };
+
   return (
     <div className={styles.container}>
       <div>{children}</div>
-      <Menu className={styles.menu} items={items} />
+      <Menu className={styles.menu} items={items} onClick={handleClick} />
     </div>
   );
 };
