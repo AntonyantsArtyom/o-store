@@ -8,12 +8,14 @@
   }
 }
 
-.menu.menu.menu::before {
+.menu.menu.menu::before,
+.menu.menu.menu::after {
   display: none;
 }
 
 .menu.menu.menu {
   display: flex;
+  flex-direction: column;
   gap: 5px;
   overflow-x: hidden;
   border-inline-end: unset;
