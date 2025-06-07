@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/shared/store";
 import styles from "./styles.module.scss";
 import { IMaskInput } from "react-imask";
+import { ordersApi } from "@/shared/api/ordersApi";
 
 interface IBasketProps {
   open: boolean;
@@ -46,13 +47,26 @@ export const Basket = ({ open, onCancel }: IBasketProps) => {
     },
   ];
 
+  const [sendOrder] = ordersApi.useSendOrderMutation();
+
+  const handleSubmit = async () => {
+    await sendOrder({
+      phone: "79163452487",
+      cart: [
+        { id: 12, quantity: 2 },
+        { id: 15, quantity: 5 },
+      ],
+    });
+    onCancel();
+  };
+
   return (
     <Modal onCancel={onCancel} open={open} footer={[]}>
       <div className={styles.container}>
         <Table pagination={false} dataSource={basketItemsWithProductData} columns={columns} />
         <IMaskInput className={styles.phone} mask="+7 (000) 000-00-00" value={phone} onAccept={(value: string) => setPhone(value)} placeholder="+7 (___) ___-__-__" unmask={false} type="tel" />
-        <Button type="primary" key="submit">
-          Отправить
+        <Button onClick={handleSubmit} type="primary" key="submit">
+          Заказать
         </Button>
       </div>
     </Modal>
