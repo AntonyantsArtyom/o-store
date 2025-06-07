@@ -1,5 +1,6 @@
 import { StateProvider } from "@/shared/StateProvider";
 import { SiteMenuWrapper } from "@/widgets/SiteMenuWrapper";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
 import type { Metadata } from "next";
 import "./styles.scss";
 
@@ -15,9 +16,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ru">
       <body>
-        <StateProvider>
-          <SiteMenuWrapper>{children}</SiteMenuWrapper>
-        </StateProvider>
+        <AntdRegistry>
+          <StateProvider>
+            <SiteMenuWrapper>{children}</SiteMenuWrapper>
+          </StateProvider>
+        </AntdRegistry>
       </body>
     </html>
   );
