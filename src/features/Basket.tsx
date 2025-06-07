@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Modal, Button, Table } from "antd";
+import { Modal, Button, Table, notification } from "antd";
 import { useSelector } from "react-redux";
 import { RootState } from "@/shared/store";
 import styles from "./styles.module.scss";
@@ -13,10 +13,30 @@ interface IBasketProps {
   onCancel: () => void;
 }
 
+enum NotificationType {
+  "success" = "success",
+  "error" = "error",
+}
+
+interface INotificationContent {
+  message: string;
+  description: string;
+}
+
 export const Basket = ({ open, onCancel }: IBasketProps) => {
   const basketItems = useSelector((state: RootState) => state.basket.items);
   const products = useSelector((state: RootState) => state.products.items);
   const [phone, setPhone] = useState("");
+
+  const [api, contextHolder] = notification.useNotification();
+
+  const openNotificationWithIcon = (type: NotificationType) => {
+    const content: Record<NotificationType, INotificationContent> = {
+      [NotificationType.success]: { message: "Заказ оформлен", description: "мы получили заказ и уже работаем над его доставкой" },
+      [NotificationType.error]: { message: "Что-то пошло не так", description: "мы не смогли получить ваш заказ" },
+    };
+    api[type](content[type]);
+  };
 
   const basketItemsWithProductData = basketItems.map((basketItem) => {
     const product = products.find((product) => product.id === basketItem.id)!;
@@ -50,25 +70,35 @@ export const Basket = ({ open, onCancel }: IBasketProps) => {
   const [sendOrder] = ordersApi.useSendOrderMutation();
 
   const handleSubmit = async () => {
-    await sendOrder({
-      phone: "79163452487",
+    const result = await sendOrder({
+      phone: phone.replace(/\D/g, ""),
       cart: [
         { id: 12, quantity: 2 },
         { id: 15, quantity: 5 },
       ],
     });
-    onCancel();
+
+    if ("error" in result) {
+      openNotificationWithIcon(NotificationType.error);
+    } else {
+      onCancel();
+      openNotificationWithIcon(NotificationType.success);
+      onCancel();
+    }
   };
 
   return (
-    <Modal onCancel={onCancel} open={open} footer={[]}>
-      <div className={styles.container}>
-        <Table pagination={false} dataSource={basketItemsWithProductData} columns={columns} />
-        <IMaskInput className={styles.phone} mask="+7 (000) 000-00-00" value={phone} onAccept={(value: string) => setPhone(value)} placeholder="+7 (___) ___-__-__" unmask={false} type="tel" />
-        <Button onClick={handleSubmit} type="primary" key="submit">
-          Заказать
-        </Button>
-      </div>
-    </Modal>
+    <>
+      {contextHolder}
+      <Modal onCancel={onCancel} open={open} footer={[]}>
+        <div className={styles.container}>
+          <Table pagination={false} dataSource={basketItemsWithProductData} columns={columns} />
+          <IMaskInput className={styles.phone} mask="+7 (000) 000-00-00" value={phone} onAccept={(value: string) => setPhone(value)} placeholder="+7 (___) ___-__-__" unmask={false} type="tel" />
+          <Button onClick={handleSubmit} type="primary" key="submit">
+            Заказать
+          </Button>
+        </div>
+      </Modal>
+    </>
   );
 };
