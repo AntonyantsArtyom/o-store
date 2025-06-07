@@ -1,7 +1,9 @@
 .list {
   display: grid;
+  gap: 15px;
+
   margin: auto;
   max-width: 1024px;
-
-  gap: 15px;
+  padding-left: 5px;
+  padding-right: 5px;
 }

@@ -1,6 +1,7 @@
 import { StateProvider } from "@/shared/StateProvider";
 import { SiteMenuWrapper } from "@/widgets/SiteMenuWrapper";
 import type { Metadata } from "next";
+import "./styles.scss";
 
 export const metadata: Metadata = {
   title: "O-store",
