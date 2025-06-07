@@ -39,7 +39,7 @@ export const Basket = ({ open, onCancel }: IBasketProps) => {
   };
 
   const basketItemsWithProductData = basketItems.map((basketItem) => {
-    const product = products.find((product) => product.id === basketItem.id)!;
+    const product = products.find((product) => product.id === basketItem.product.id)!;
     return {
       ...product,
       count: basketItem.count,

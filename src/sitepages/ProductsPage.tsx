@@ -32,7 +32,7 @@ export const ProductsPage = ({ initial }: { initial: IGetProductsResponse }) => 
   }, [productsData]);
 
   const productsWithCount = (products.length ? products : initial.items).map((product) => {
-    const basketItem = basketItems.find((item) => item.id === product.id);
+    const basketItem = basketItems.find((item) => item.product.id === product.id);
     return {
       ...product,
       count: basketItem?.count,

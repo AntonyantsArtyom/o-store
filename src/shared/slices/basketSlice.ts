@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IProduct } from "../api/productsApi";
 
 export interface IBasketItem {
-  id: number;
+  product: IProduct;
   count: number;
 }
 
@@ -17,21 +18,16 @@ export const basketSlice = createSlice({
   name: "basket",
   initialState,
   reducers: {
-    addToBasket(state, action: PayloadAction<number>) {
-      const existingItem = state.items.find((item) => item.id === action.payload);
-      if (existingItem) {
-        existingItem.count += 1;
+    setCount(state, action: PayloadAction<{ product: IProduct; count: number }>) {
+      const { product, count } = action.payload;
+      const existingItem = state.items.find((item) => item.product.id === product.id);
+
+      if (count === 0) {
+        state.items = state.items.filter((item) => item.product.id !== product.id);
+      } else if (existingItem) {
+        existingItem.count = count;
       } else {
-        state.items.push({ id: action.payload, count: 1 });
-      }
-    },
-    removeFromBasket(state, action: PayloadAction<number>) {
-      state.items = state.items.filter((item) => item.id !== action.payload);
-    },
-    updateCount(state, action: PayloadAction<{ id: number; count: number }>) {
-      const item = state.items.find((item) => item.id === action.payload.id);
-      if (item) {
-        item.count = action.payload.count;
+        state.items.push({ product, count });
       }
     },
     clearBasket(state) {
@@ -39,3 +35,6 @@ export const basketSlice = createSlice({
     },
   },
 });
+
+export const { setCount, clearBasket } = basketSlice.actions;
+export default basketSlice.reducer;

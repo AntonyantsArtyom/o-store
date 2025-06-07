@@ -15,20 +15,18 @@ export interface IProductWithCount extends IProduct {
   count?: number;
 }
 
-export const ProductCard = ({ image_url, title, description, price, count, id }: IProductWithCount) => {
+export const ProductCard = (product: IProductWithCount) => {
+  const { image_url, title, description, price, count, id } = product;
   const type = count ? CardType.withCount : CardType.default;
   const dispatch = useDispatch();
 
   const handleBuyClick = () => {
-    dispatch(basketSlice.actions.addToBasket(id));
+    dispatch(basketSlice.actions.setCount({ product, count: 1 }));
   };
 
   const handleCountChange = (value: number | null) => {
     if (value !== null) {
-      if (value === 0) {
-        return dispatch(basketSlice.actions.removeFromBasket(id));
-      }
-      dispatch(basketSlice.actions.updateCount({ id, count: value }));
+      dispatch(basketSlice.actions.setCount({ product, count: value }));
     }
   };
 
