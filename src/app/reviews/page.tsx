@@ -1,5 +1,5 @@
 import { ReviewsPage } from "@/sitepages/ReviewsPage";
 
-export default async function Basket() {
+export default function Reviews() {
   return <ReviewsPage />;
 }
