@@ -1,9 +1,20 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { productsApi } from "@/shared/api/productsApi";
 import { productsSlice } from "./slices/productsSlice";
-import { basketSlice } from "./slices/basketSlice";
+import { basketSlice, IBasketState } from "./slices/basketSlice";
 import { reviewsApi } from "./api/reviewsApi";
 import { ordersApi } from "./api/ordersApi";
+
+const saveBasketToLocalStorage = (basket: IBasketState) => {
+  localStorage.setItem("basket", JSON.stringify(basket));
+};
+
+const basketMiddleware = (storeAPI: any) => (next: any) => (action: any) => {
+  const result = next(action);
+  const state = storeAPI.getState();
+  saveBasketToLocalStorage(state.basket);
+  return result;
+};
 
 export const store = configureStore({
   reducer: {
@@ -13,7 +24,7 @@ export const store = configureStore({
     [reviewsApi.reducerPath]: reviewsApi.reducer,
     [ordersApi.reducerPath]: ordersApi.reducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([productsApi.middleware, reviewsApi.middleware, ordersApi.middleware]),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([productsApi.middleware, reviewsApi.middleware, ordersApi.middleware, basketMiddleware]),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

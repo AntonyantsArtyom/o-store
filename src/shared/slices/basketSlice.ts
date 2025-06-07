@@ -10,9 +10,17 @@ export interface IBasketState {
   items: IBasketItem[];
 }
 
-const initialState: IBasketState = {
-  items: [],
+const loadBasketFromLocalStorage = (): IBasketState => {
+  try {
+    const data = localStorage.getItem("basket");
+    if (!data) return { items: [] };
+    return JSON.parse(data);
+  } catch {
+    return { items: [] };
+  }
 };
+
+const initialState: IBasketState = typeof window !== "undefined" ? loadBasketFromLocalStorage() : { items: [] };
 
 export const basketSlice = createSlice({
   name: "basket",

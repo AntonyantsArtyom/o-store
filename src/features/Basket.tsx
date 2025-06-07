@@ -38,12 +38,11 @@ export const Basket = ({ open, onCancel }: IBasketProps) => {
     api[type](content[type]);
   };
 
-  const basketItemsWithProductData = basketItems.map((basketItem) => {
-    const product = products.find((product) => product.id === basketItem.product.id)!;
+  const TableBasketItem = basketItems.map((basketItem) => {
     return {
-      ...product,
+      ...basketItem.product,
       count: basketItem.count,
-      key: product.id,
+      key: basketItem.product.id,
     };
   });
 
@@ -92,7 +91,7 @@ export const Basket = ({ open, onCancel }: IBasketProps) => {
       {contextHolder}
       <Modal onCancel={onCancel} open={open} footer={[]}>
         <div className={styles.container}>
-          <Table pagination={false} dataSource={basketItemsWithProductData} columns={columns} />
+          <Table pagination={false} dataSource={TableBasketItem} columns={columns} />
           <IMaskInput className={styles.phone} mask="+7 (000) 000-00-00" value={phone} onAccept={(value: string) => setPhone(value)} placeholder="+7 (___) ___-__-__" unmask={false} type="tel" />
           <Button onClick={handleSubmit} type="primary" key="submit">
             Заказать
