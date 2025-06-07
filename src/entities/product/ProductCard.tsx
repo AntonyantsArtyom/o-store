@@ -49,10 +49,10 @@ export const ProductCard = ({ image_url, title, description, price, count, id }:
   return (
     <Card hoverable className={styles.card}>
       <h1>{id}</h1>
-      <Image className="image" src={image_url} />
-      <h2 className="title">{title}</h2>
-      <p className="description">{description}</p>
-      <p className="price">{price}</p>
+      <Image src={image_url} />
+      <h2>{title}</h2>
+      <p>{description}</p>
+      <p>{price}</p>
       {renderFootContent()}
     </Card>
   );

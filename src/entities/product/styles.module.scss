@@ -8,11 +8,22 @@
   justify-content: center;
   padding-left: 5px;
   padding-right: 5px;
+
+  @media (max-width: 890px) {
+    .card {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 600px) {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
 }
 
 .card {
   width: 320px;
-  :global(.image) {
+  :global(.ant-image) {
     width: 100%;
   }
 }
