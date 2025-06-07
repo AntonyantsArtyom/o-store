@@ -1,9 +1,10 @@
 "use client";
 
 import { useRouter, usePathname } from "next/navigation";
-import { Menu, MenuProps } from "antd";
+import { Button, Menu, MenuProps } from "antd";
 import styles from "./style.module.scss";
 import { useState, useEffect } from "react";
+import { Basket } from "@/features/Basket";
 
 enum Routes {
   products = "/",
@@ -13,7 +14,7 @@ enum Routes {
 export const SiteMenuWrapper = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   const pathname = usePathname();
-
+  const [isBasketOpen, setIsBasketOpen] = useState(false);
   const [selectedKey, setSelectedKey] = useState(pathname);
 
   useEffect(() => {
@@ -35,10 +36,24 @@ export const SiteMenuWrapper = ({ children }: { children: React.ReactNode }) => 
     router.push(e.key);
   };
 
+  const handleButtonClick = () => {
+    setIsBasketOpen(true);
+  };
+
+  const handleBasketCancelClick = () => {
+    setIsBasketOpen(false);
+  };
+
   return (
-    <div className={styles.container}>
-      <div>{children}</div>
-      <Menu className={styles.menu} items={items} onClick={handleClick} selectedKeys={[selectedKey]} />
-    </div>
+    <>
+      <Basket open={isBasketOpen} onCancel={handleBasketCancelClick} />
+      <div className={styles.container}>
+        <div>{children}</div>
+        <div>
+          <Menu className={styles.menu} items={items} onClick={handleClick} selectedKeys={[selectedKey]} />
+          <Button onClick={handleButtonClick}>корзина</Button>
+        </div>
+      </div>
+    </>
   );
 };

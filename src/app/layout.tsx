@@ -15,9 +15,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ru">
       <body>
-        <SiteMenuWrapper>
-          <StateProvider>{children}</StateProvider>
-        </SiteMenuWrapper>
+        <StateProvider>
+          <SiteMenuWrapper>{children}</SiteMenuWrapper>
+        </StateProvider>
       </body>
     </html>
   );
