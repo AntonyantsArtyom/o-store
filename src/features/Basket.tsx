@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/app/store";
 import styles from "./styles.module.scss";
 import { IMaskInput } from "react-imask";
-import { ordersApi } from "@/entities/ordersApi/ordersApi";
+import { ordersApi } from "@/entities/orders/ordersApi";
 
 interface IBasketProps {
   open: boolean;
