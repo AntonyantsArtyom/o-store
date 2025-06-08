@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Modal, Button, Table, notification } from "antd";
+import { Modal, Button, Table, notification, Popover } from "antd";
 import { useSelector } from "react-redux";
 import { RootState } from "@/shared/store";
 import styles from "./styles.module.scss";
@@ -100,9 +100,11 @@ export const Basket = ({ open, onCancel }: IBasketProps) => {
         <div className={styles.container}>
           <Table pagination={false} dataSource={TableBasketItem} columns={columns} />
           <IMaskInput className={styles.phone} mask="+7 (000) 000-00-00" value={phone} onAccept={(value: string) => setPhone(value)} placeholder="+7 (___) ___-__-__" unmask={false} type="tel" />
-          <Button onClick={handleSubmit} type="primary" key="submit">
-            Заказать
-          </Button>
+          <Popover content={phone.replace(/\D/g, "").length !== 11 ? "для оформления заказа введите телефон" : null}>
+            <Button disabled={phone.replace(/\D/g, "").length !== 11} onClick={handleSubmit} type="primary">
+              Заказать
+            </Button>
+          </Popover>
         </div>
       </Modal>
     </>
