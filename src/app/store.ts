@@ -6,6 +6,7 @@ import { reviewsApi } from "../entities/review/reviewsApi";
 import { ordersApi } from "../entities/orders/ordersApi";
 
 const saveBasketToLocalStorage = (basket: IBasketState) => {
+  if (typeof localStorage === "undefined") return;
   localStorage.setItem("basket", JSON.stringify(basket));
 };
 

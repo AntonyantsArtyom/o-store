@@ -25,7 +25,11 @@ interface INotificationContent {
 
 export const Basket = ({ open, onCancel }: IBasketProps) => {
   const basketItems = useSelector((state: RootState) => state.basket.items);
-  const [phone, setPhone] = useState(localStorage.getItem("phone") || "");
+  const [phone, setPhone] = useState("");
+
+  useEffect(() => {
+    setPhone(localStorage.getItem("phone") || "");
+  }, []);
 
   const [api, contextHolder] = notification.useNotification();
 
