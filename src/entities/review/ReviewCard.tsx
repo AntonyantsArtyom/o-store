@@ -1,4 +1,4 @@
-import { IReview } from "@/shared/api/reviewsApi";
+import { IReview } from "@/entities/review/reviewsApi";
 import parse from "html-react-parser";
 import { Card } from "antd";
 

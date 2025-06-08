@@ -1,4 +1,4 @@
-import { IProduct } from "@/shared/api/productsApi";
+import { IProduct } from "@/entities/product/productsApi";
 import { ProductCard } from "./ProductCard";
 import styles from "./styles.module.scss";
 

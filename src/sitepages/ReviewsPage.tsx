@@ -1,7 +1,7 @@
 "use client";
 
 import { ReviewsList } from "@/entities/review/ReviewsList";
-import { reviewsApi } from "@/shared/api/reviewsApi";
+import { reviewsApi } from "@/entities/review/reviewsApi";
 
 export const ReviewsPage = () => {
   const { data: reviews } = reviewsApi.useGetReviewsQuery();

@@ -1,6 +1,6 @@
 import styles from "./styles.module.scss";
 import { ReviewCard } from "./ReviewCard";
-import { IReview } from "@/shared/api/reviewsApi";
+import { IReview } from "@/entities/review/reviewsApi";
 
 export const ReviewsList = ({ reviews }: { reviews: IReview[] }) => {
   return (

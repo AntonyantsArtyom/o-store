@@ -1,5 +1,5 @@
 import { ProductsPage } from "@/sitepages/ProductsPage";
-import { IGetProductsResponse } from "@/shared/api/productsApi";
+import { IGetProductsResponse } from "@/entities/product/productsApi";
 
 export default async function Home() {
   const serverResponse = await fetch("http://o-complex.com:1337/products?page=1&page_size=18");

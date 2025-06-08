@@ -1,4 +1,4 @@
-import { StateProvider } from "@/shared/StateProvider";
+import { StateProvider } from "@/app/StateProvider";
 import { SiteMenuWrapper } from "@/widgets/SiteMenuWrapper";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import type { Metadata } from "next";

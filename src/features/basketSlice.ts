@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IProduct } from "../api/productsApi";
+import { IProduct } from "../entities/product/productsApi";
 
 export interface IBasketItem {
   product: IProduct;

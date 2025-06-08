@@ -1,7 +1,7 @@
-import { IProduct } from "@/shared/api/productsApi";
+import { IProduct } from "@/entities/product/productsApi";
 import { Button, Card, InputNumber } from "antd";
 import styles from "./styles.module.scss";
-import { basketSlice } from "@/shared/slices/basketSlice";
+import { basketSlice } from "@/features/basketSlice";
 import { useDispatch } from "react-redux";
 import { Image } from "antd";
 import { EyeOutlined } from "@ant-design/icons";

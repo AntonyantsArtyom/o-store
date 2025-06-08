@@ -3,10 +3,10 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Button, Table, notification, Popover } from "antd";
 import { useSelector } from "react-redux";
-import { RootState } from "@/shared/store";
+import { RootState } from "@/app/store";
 import styles from "./styles.module.scss";
 import { IMaskInput } from "react-imask";
-import { ordersApi } from "@/shared/api/ordersApi";
+import { ordersApi } from "@/entities/ordersApi/ordersApi";
 
 interface IBasketProps {
   open: boolean;

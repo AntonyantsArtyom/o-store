@@ -5,7 +5,7 @@ import { Badge, Button, Menu, MenuProps, Popover } from "antd";
 import styles from "./style.module.scss";
 import { useState, useEffect } from "react";
 import { Basket } from "@/features/Basket";
-import { RootState } from "@/shared/store";
+import { RootState } from "@/app/store";
 import { useSelector } from "react-redux";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 

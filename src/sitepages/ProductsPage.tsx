@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/shared/store";
-import { productsSlice } from "@/shared/slices/productsSlice";
-import { IGetProductsResponse, productsApi } from "@/shared/api/productsApi";
+import { RootState } from "@/app/store";
+import { productsSlice } from "@/entities/product/productsSlice";
+import { IGetProductsResponse, productsApi } from "@/entities/product/productsApi";
 import { ProductList } from "@/entities/product/ProductList";
 import { IntersectionCheck } from "@/shared/IntersectionCheck";
 

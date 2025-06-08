@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { productsApi } from "@/shared/api/productsApi";
-import { productsSlice } from "./slices/productsSlice";
-import { basketSlice, IBasketState } from "./slices/basketSlice";
-import { reviewsApi } from "./api/reviewsApi";
-import { ordersApi } from "./api/ordersApi";
+import { productsApi } from "@/entities/product/productsApi";
+import { productsSlice } from "../entities/product/productsSlice";
+import { basketSlice, IBasketState } from "../features/basketSlice";
+import { reviewsApi } from "../entities/review/reviewsApi";
+import { ordersApi } from "../entities/ordersApi/ordersApi";
 
 const saveBasketToLocalStorage = (basket: IBasketState) => {
   localStorage.setItem("basket", JSON.stringify(basket));
